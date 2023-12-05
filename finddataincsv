@@ -1,0 +1,40 @@
+/*
+Поэтапный поиск данных
+Данная задача в основном ориентирована на изучение типа bufio.Reader, поскольку этот тип позволяет считывать данные постепенно.
+https://stepik.org/lesson/351892/step/14?unit=335849
+*/
+package main
+
+import (
+	//"bufio"
+	"fmt"
+	"os"
+
+	"encoding/csv"
+	"strings"
+)
+
+func main() {
+	f, err := os.Open("task.data")
+	if err != nil {
+		panic(err)
+	}
+
+	defer f.Close()
+
+	csvReader := csv.NewReader(f)
+	data, err := csvReader.ReadAll()
+	if err != nil {
+		panic(err)
+	}
+
+	words := strings.Split(data[0][0], ";")
+	ind := 1
+	for _, n := range words {
+		if "0" == n {
+			fmt.Println(ind)
+			break
+		}
+		ind++
+	}
+}
