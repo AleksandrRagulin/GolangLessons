@@ -1,0 +1,4 @@
+start the program from command line
+go run main.go . [-f]
+
+
