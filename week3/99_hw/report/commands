@@ -16,7 +16,8 @@ go test -bench . -benchmem
 
 
 BenchmarkSlow-4                2         841984892 ns/op        20156460 B/op     182809 allocs/op
-BenchmarkSolution-8            500       2782432 ns/op           559910 B/op       10422 allocs/op
-BenchmarkFast-4                5         244567526 ns/op         2712649 B/op      47242 allocs/op
+BenchmarkSolution-8            500         2782432 ns/op          559910 B/op      10422 allocs/op
+BenchmarkFast-4                12         66212654 ns/op          718512 B/op      11324 allocs/op
+
 
 
