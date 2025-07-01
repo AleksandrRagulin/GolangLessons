@@ -15,7 +15,6 @@ type User struct {
 	Name     string   `json:"name"`
 }
 
-// вам надо написать более быструю оптимальную этой функции
 func FastSearch(out io.Writer) {
 
 	file, err := os.Open(filePath)
@@ -33,12 +32,15 @@ func FastSearch(out io.Writer) {
 	uniqueBrowsers := 0
 
 	i := -1
-	user := &User{}
+	//user := &User{}
+	user := new(User)
 	fmt.Fprintln(out, "found users:")
+
+	lineBytes := make([]byte, 0, 1024)
 
 	for fileScanner.Scan() {
 
-		lineBytes := fileScanner.Bytes()
+		lineBytes = fileScanner.Bytes()
 
 		err := json.Unmarshal(lineBytes, user)
 		if err != nil {
@@ -47,12 +49,10 @@ func FastSearch(out io.Writer) {
 
 		i++
 
-		browsers := user.Browsers
-
 		isAndroid := false
 		isMSIE := false
 
-		for _, browserRaw := range browsers {
+		for _, browserRaw := range user.Browsers {
 
 			browser := browserRaw
 
