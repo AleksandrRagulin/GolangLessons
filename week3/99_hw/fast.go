@@ -1,9 +1,10 @@
-package main
+package hw3
 
 import (
 	"bufio"
-	"encoding/json"
+	//"encoding/json"
 	"fmt"
+	"github.com/mailru/easyjson"
 	"io"
 	"os"
 	"strings"
@@ -33,7 +34,9 @@ func FastSearch(out io.Writer) {
 
 	i := -1
 	//user := &User{}
-	user := new(User)
+	//user := new(User)
+	var user User
+
 	fmt.Fprintln(out, "found users:")
 
 	lineBytes := make([]byte, 0, 1024)
@@ -41,8 +44,8 @@ func FastSearch(out io.Writer) {
 	for fileScanner.Scan() {
 
 		lineBytes = fileScanner.Bytes()
-
-		err := json.Unmarshal(lineBytes, user)
+		err := easyjson.Unmarshal(lineBytes, &user)
+		//err := json.Unmarshal(lineBytes, user)
 		if err != nil {
 			panic(err)
 		}
